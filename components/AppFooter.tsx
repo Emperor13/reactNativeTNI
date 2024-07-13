@@ -1,43 +1,31 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const AppFooter = () => {
-  const hello = "Hello TNI Footer";
-  const hello2 = <Text>Hello JSX! How are you?</Text>; //Store components in variable
+import styles from "../styles/AppFooterStyles";
 
-  const isLogin = true;
+type AppFooterProps = {
+    tni: string,
+}
+const AppFooter = ({tni}:AppFooterProps) => {
+
   return (
-      <View style={styles.bgColor}>
-        <Text style={styles.myText}>
-          {hello} Date: {new Date().toLocaleDateString()}
+      <View style={styles.footer}>
+        <Text style={styles.footerText}>
+          {tni}
         </Text>
-        {hello2}
+      </View>
+       
 
-        {isLogin && <Text>Welcome Sir!</Text>} 
+         /* {isLogin && <Text>Welcome Sir!</Text>} 
 
         {
             isLogin == true
             ? <Text>Welcome Marry!</Text> //if
             : <Text>Please login...</Text> //else
-        }
-      </View>
+        } */
+      
   );
 };
 
 export default AppFooter;
 
-const styles = StyleSheet.create({
-  bgColor: {
-    alignItems: "flex-end",
-    backgroundColor: "lightblue",
-    paddingHorizontal: 20,
-    paddingVertical: 10,
-    marginTop: 10,
-    borderTopLeftRadius: 10,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-  },
-  myText: {
-    color: "gray",
-  },
-});
