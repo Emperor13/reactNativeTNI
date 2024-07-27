@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
+//import style
 import styles from "../styles/AppFooterStyles";
 
 type AppFooterProps = {

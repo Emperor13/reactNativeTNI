@@ -1,5 +1,8 @@
 import { StyleSheet, Text, View, Button, Alert } from 'react-native'
 import React from 'react'
+
+
+// import style
 import styles from '../styles/ContentStyle'
 
 type ContentProps = {

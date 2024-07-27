@@ -1,7 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
+//import style
 import styles from "../styles/AppHeaderStyles";
+
 //create type of variables for props
 type AppHeaderProps = {
   fName: string;
