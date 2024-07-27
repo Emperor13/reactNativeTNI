@@ -10,7 +10,7 @@ export default StyleSheet.create({
         width: 100,
         height: 100,
         borderColor: "#add8e6",
-        borderWidth: 4,
+        borderWidth: 2,
       },
       profileContainer: {
         flexDirection: "row",
@@ -19,13 +19,17 @@ export default StyleSheet.create({
         padding: 20,
         borderRadius: 10,
         backgroundColor: "white",
-        elevation: 5,
+        elevation: 10,
         marginTop: 30,
+        shadowColor: "#4682b4",
       },
       profileName: {
-        marginLeft: 15,
-        fontWeight: "bold",
-        fontSize: 16,
-        color: "#4682b4"
+        fontWeight: "semibold",
+        fontSize: 20,
+        color: "#4682b4",
+        fontStyle: "italic"
       },  
+      nameContainer: {
+        marginLeft: 20,
+      },
 });
