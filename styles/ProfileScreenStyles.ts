@@ -30,6 +30,7 @@ export default StyleSheet.create({
         fontStyle: "italic"
       },  
       nameContainer: {
+        width: 180,
         marginLeft: 20,
       },
 });
