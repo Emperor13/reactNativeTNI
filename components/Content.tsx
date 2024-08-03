@@ -6,24 +6,26 @@ import { stylesPractice } from "../styles/styles";
 
 type ContentProps = {
   msg: string;
-  fName: string;
+  // fName: string;
+  onButtonClick:() => void; //function props
 };
-const Content = ({ msg, fName }: ContentProps) => {
-  const [displayFName, setDisplayFName] = useState("");
 
-  useEffect(() => {
-    setDisplayFName(fName);
-  }, [fName]); //to update fName to latest value
+const Content = ({ msg, onButtonClick }: ContentProps) => {
+  // const [displayFName, setDisplayFName] = useState("");
 
-  const onClickAlert = () => {
-    Alert.alert("Hello", `Input your fullname : ${displayFName}`);
-  };
+  // useEffect(() => {
+  //   setDisplayFName(fName);
+  // }, [fName]); //to update fName to latest value
+
+  // const onClickAlert = () => {
+  //   Alert.alert("Hello", `Input your fullname : ${displayFName}`);
+  // };
 
   return (
     <View style={stylesPractice.container}>
       <Text style={stylesPractice.text}>{msg}</Text>
-      <Text style={stylesPractice.text}>{displayFName}</Text>
-      <Button title="Click Me" onPress={onClickAlert} color="lightgreen" />
+      {/* <Text style={stylesPractice.text}>{displayFName}</Text> */}
+      <Button title="Click Me" onPress={onButtonClick} color="lightgreen" />
     </View>
   );
 };

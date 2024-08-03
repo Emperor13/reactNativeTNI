@@ -14,6 +14,10 @@ export default function App(): React.JSX.Element {
     "Thai-Nichi Institute of Technology"
   );
 
+  const handleBtnClick = () => {
+    Alert.alert("Hello", `Input your fullname : ${fName}`);
+  }
+
   useEffect(() => {
     console.log("Component has mounted...");
   }, []);
@@ -25,9 +29,11 @@ export default function App(): React.JSX.Element {
   return (
     <View style={styles.container}>
       <AppHeader fName={fName} msg={msg} />
-      <Content msg={msg} fName={fName} />
+      
+      <Content msg={msg} onButtonClick={handleBtnClick}/>
       <AppFooter tni={footerMsg} />
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", marginTop: 10}}>
+      <Text >{fName}</Text>
         <TextInput
           style={stylesPractice.input}
           placeholder="Enter fullname"
