@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 //import style
-import styles from "../styles/AppFooterStyles";
+import {stylesPractice} from "../styles/styles";
 
 type AppFooterProps = {
     tni: string,
@@ -10,8 +10,8 @@ type AppFooterProps = {
 const AppFooter = ({tni}:AppFooterProps) => {
 
   return (
-      <View style={styles.footer}>
-        <Text style={styles.footerText}>
+      <View style={stylesPractice.footer}>
+        <Text style={stylesPractice.footerText}>
           {tni}
         </Text>
       </View>
