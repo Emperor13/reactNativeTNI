@@ -8,8 +8,7 @@ const App = (): React.JSX.Element => {
   return (
     <View>
       
-      {/*<FlatListExample/> */}
-      <FlatListCallBackend/>
+      <NewsApp/>
     </View>
   )
 }
