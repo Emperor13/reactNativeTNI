@@ -1,5 +1,6 @@
 import {StyleSheet, View, Text, Button } from "react-native";
 import React from "react";
+import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 
 const HomeScreen = ({ navigation, route}: any): React.JSX.Element => {
   const toAbout = () => {
@@ -13,18 +14,19 @@ const HomeScreen = ({ navigation, route}: any): React.JSX.Element => {
     navigation.navigate("CreatePost");
   };
 
-  const {post} = route.params;
+  // const {post} = route.params;
   // route.params?.post store null to db if data not enter
 
   return (
     <View style={styles.container}>
+      <MaterialIcon name="home" size={40} color="salmon"/>
       <Text style={styles.header}>HomeScreen</Text>
       <Button title="About Us" onPress={toAbout} />
 
       <View style={styles.postContainer}>
         <Button title="Create Post" onPress={toPost} />
         <Text style={styles.postText}>Post:</Text>
-        <Text style={styles.postContent}>{post}</Text>
+        <Text style={styles.postContent}>{route.params?.post}</Text>
       </View>
     </View>
   );

@@ -10,11 +10,30 @@ const App = (): React.JSX.Element => {
   const HomeStack = createNativeStackNavigator();
 
   return (
-    <NavigationContainer>
-      <HomeStack.Navigator initialRouteName="Home">
-        <HomeStack.Screen name="Home" component={HomeScreen} />
-        <HomeStack.Screen name="About" component={AboutScreen} />
-        <HomeStack.Screen name="CreatePost" component={CreatePostScreen} />
+    <NavigationContainer >
+      <HomeStack.Navigator 
+      initialRouteName="Home" 
+      screenOptions={{
+        headerTintColor: "white", 
+        headerStyle: {
+        backgroundColor: "lightpink"
+        },
+        headerTitleStyle: {fontWeight: 'bold'},
+        }}>
+        <HomeStack.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{title:"หน้าหลัก"}}
+        />
+        <HomeStack.Screen 
+        name="About" 
+        component={AboutScreen} 
+        options={{title:"เกี่ยวกับเรา"}}
+        />
+        <HomeStack.Screen 
+        name="CreatePost" 
+        component={CreatePostScreen} 
+        options={{title:"สร้างโพสท์"}}/>
       </HomeStack.Navigator>
     </NavigationContainer>
   );
