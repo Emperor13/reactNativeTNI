@@ -112,11 +112,9 @@ export default WeatherBangkok;
 
 const styles = StyleSheet.create({
   container: {
-    height: 900,
     justifyContent: "center",
     alignItems: "center",
     padding: 16,
-    paddingTop: 170,
     backgroundColor: "#eaf4fc",
   },
   centeredContainer: {
