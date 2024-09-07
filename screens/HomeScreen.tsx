@@ -26,7 +26,7 @@ const HomeScreen = (): React.JSX.Element => {
           <Item
             title="menu"
             iconName="menu"
-            onPress={() => Alert.alert("Open Menu", "Hello React Native")}
+            onPress={() => navigation.openDrawer()}
           />
         </HeaderButtons>
       ),
