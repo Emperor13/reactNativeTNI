@@ -13,6 +13,7 @@ import CreatePostScreen from "./screens/CreatePostScreen";
 import AppLogo from "./components/AppLogo";
 import MenuScreen from "./screens/MenuScreen";
 import ProductScreen from "./screens/ProductScreen";
+import DetailScreen from "./screens/DetailScreen";
 
 //navigation import
 import { NavigationContainer } from "@react-navigation/native";
@@ -80,6 +81,10 @@ function ProductStackScreen() {
       <ProductStack.Screen
         name="Products"
         component={ProductScreen}
+      />
+      <ProductStack.Screen
+        name="Detail"
+        component={DetailScreen}
       />
 
     </ProductStack.Navigator>
