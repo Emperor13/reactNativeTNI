@@ -9,7 +9,8 @@ import {
 import { findProducbyId } from "../services/product-service";
 import { FlatList } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native";
-
+import { Tile } from "@rneui/themed";
+import { Dimensions } from "react-native";
 
 const DetailScreen = (): React.JSX.Element => {
   const [data, setData] = useState<any[]>([]);
@@ -48,16 +49,27 @@ const DetailScreen = (): React.JSX.Element => {
 
   const _renderItem: ListRenderItem<any> = ({ item }) => {
     return (
-      <View>
-        <Text>{item.ch_title}</Text>
-        {/* <Text>{item.ch_dateadd}</Text> */}
+      <View style={styles.tileContainer}>
+        <Tile
+          imageSrc={{
+            uri: "https://www.b-sides.tv/wp-content/uploads/2019/03/aurora.jpg",
+          }}
+          title={item.ch_title}
+          titleStyle={styles.titleStyle}
+          featured
+          caption={item.ch_dateadd}
+          captionStyle={styles.captionStyle}
+          activeOpacity={1}
+          width={Dimensions.get('screen').width - 20} //ลบขอบทั้งสองข้าง
+        />
       </View>
     );
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
+        contentContainerStyle={styles.listContent}
         data={data}
         renderItem={_renderItem}
         keyExtractor={(item) => item.ch_id}
@@ -73,4 +85,30 @@ const DetailScreen = (): React.JSX.Element => {
 export default DetailScreen;
 
 const styles = StyleSheet.create({
+  container: {
+    paddingTop: 10,
+    backgroundColor: "#f7f7f7", // สีพื ้นหลัง
+  },
+  listContent: {
+    paddingHorizontal: 10, // การเว้นวรรคขอบซ้ายและขวาเท่ากัน
+  },
+  titleStyle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#000", // สีขาวส าหรับชื่อ
+  },
+  tileContainer: {
+    borderRadius: 10, //ก าหนดให้มุมของ container มีความโค้งมน
+    overflow: "hidden", //ก าหนดให้เนื ้อหาที่อาจล้นออกจากขอบของ container ไม่แสดงผล
+    marginBottom: 10, //ก าหนดระยะห่างจากขอบล่างของ container ไปยัง element ต่อไปที่อยู ่ด้านล่าง
+    elevation: 5, // เงาส าหรับ Android
+    shadowOffset: { width: 0, height: 2 }, //ก าหนดต าแหน่งของเงาที่แสดงผล
+    shadowOpacity: 0.25, //ก าหนดระดับความโปร่งแสงของเงา
+    shadowRadius: 3.84, //ก าหนดรัศมีของการกระจายตัวของเงา
+    opacity: 0.5, // ความโปร่งใสของภาพ , ค่าน้อยจะโปร่งใสมาก
+  },
+  captionStyle: {
+    fontSize: 14,
+    color: "#000", // สีขาวส าหรับวันที่
+  },
 });
