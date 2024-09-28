@@ -13,6 +13,7 @@ import {
   setProfile,
 } from "./auth/auth-slice";
 import { getProfile } from "./services/auth-service";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
 //Screen Import
 import HomeScreen from "./screens/HomeScreen";
@@ -32,11 +33,72 @@ import LoginScreen from "./screens/LoginScreen";
 import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 import { store } from "./redux-toolkit/store";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import CameraScreen from "./screens/CameraScreen";
 
 const HomeStack = createNativeStackNavigator();
 const ProductStack = createNativeStackNavigator();
 const LoginStack = createNativeStackNavigator();
+const CameraStack = createNativeStackNavigator();
+
 const Drawer = createDrawerNavigator();
+
+const Tab = createBottomTabNavigator();
+
+function TabContainer() {
+  return (
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName = "";
+
+          if (route.name === "Home") {
+            iconName = focused
+              ? "Home"
+              : "Home-outline";
+          } else if (route.name === "CameraStack") {
+            iconName = focused ? "camera" : "camera-outline";
+          }
+
+          // You can return any component that you like here!
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: "salmon",
+        tabBarInactiveTintColor: "gray",
+        headerShown: false,
+        tabBarActiveBackgroundColor: 'lightblue'
+      })}
+    >
+      <Tab.Screen
+        name="HomeStack"
+        component={HomeStackScreen}
+        options={{ tabBarLabel: "หน้าหลัก" }}
+      />
+      <Tab.Screen
+        name="CameraStack"
+        component={CameraStackScreen}
+        options={{ tabBarLabel: "หน้าสินค้า" }}
+      ></Tab.Screen>
+    </Tab.Navigator>
+  );
+}
+
+function CameraStackScreen() {
+  return (
+    <CameraStack.Navigator
+      initialRouteName="Products"
+      screenOptions={{
+        headerTitleStyle: { fontWeight: "bold" },
+      }}
+    >
+      <CameraStack.Screen
+        name="Login"
+        component={CameraScreen}
+        options={{ title: "Camera" }}
+      />
+    </CameraStack.Navigator>
+  );
+}
 
 function HomeStackScreen() {
   return (
@@ -116,7 +178,7 @@ const App = (): React.JSX.Element => {
   const dispatch = useAppDispatch();
   const checkLogin = async () => {
     try {
-      dispatch(setIsLoading(true));
+      dispatch(setIsLogin(true));
       const res = await getProfile();
       if (res?.data.data.user) {
         dispatch(setProfile(res.data.data.user));
@@ -152,7 +214,7 @@ const App = (): React.JSX.Element => {
             screenOptions={{ headerShown: false }}
             drawerContent={(props) => <MenuScreen {...props} />}
           >
-            <Drawer.Screen name="HomeStack" component={HomeStackScreen} />
+            <Drawer.Screen name="Home" component={TabContainer} />
             <Drawer.Screen name="ProductStack" component={ProductStackScreen} />
           </Drawer.Navigator>
         ) : (
