@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Button, Alert } from "react-native";
+import { StyleSheet, View, Button} from "react-native";
 import React, { useLayoutEffect } from "react";
 import MaterialIcon from "react-native-vector-icons/MaterialIcons";
 import { useNavigation } from "@react-navigation/native";
@@ -8,6 +8,13 @@ import {
   HeaderButtons,
   Item,
 } from "react-navigation-header-buttons";
+import { Text } from "@rneui/base";
+
+
+import { useAppDispatch, useAppSelector } from "../redux-toolkit/hooks";
+import { selectAuthState, setIsLogin } from "../auth/auth-slice";
+import { logout } from "../services/auth-service";
+
 
 const MaterialHeaderButton = (props: any) => (
   <HeaderButton IconComponent={MaterialIcon} iconSize={23} {...props} />
@@ -15,6 +22,8 @@ const MaterialHeaderButton = (props: any) => (
 
 const HomeScreen = (): React.JSX.Element => {
   const navigation = useNavigation<any>();
+  const dispatch = useAppDispatch();
+  const {profile} = useAppSelector(selectAuthState);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -35,7 +44,10 @@ const HomeScreen = (): React.JSX.Element => {
           <Item
             title="logout"
             iconName="logout"
-            onPress={() => Alert.alert("Log out", "Close Menu")}
+            onPress={async () => {
+              await logout();
+              dispatch(setIsLogin(false));
+            }}
           />
         </HeaderButtons>
       ),
@@ -49,17 +61,20 @@ const HomeScreen = (): React.JSX.Element => {
     });
   };
 
-  const toPost = () => {
-    navigation.navigate("CreatePost");
-  };
-
   // const {post} = route.params;
   // route.params?.post store null to db if data not enter
 
   return (
     <View style={styles.container}>
       <MaterialIcon name="home" size={40} color="salmon" />
-      <Text style={styles.header}>HomeScreen</Text>
+      {profile? (
+        <>
+          <Text h3> Welcome {profile.name}</Text>
+          <Text>
+            Email: {profile.email} ID: {profile.id} Role: {profile.role}
+          </Text>
+        </>
+      ) : null}
       <Button title="About Us" onPress={toAbout} />
     </View>
   );

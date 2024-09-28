@@ -18,7 +18,7 @@ export async function logout() {
     await AsyncStorage.removeItem('@token');
 }
 
-export async function getPrfile() {
+export async function getProfile() {
     const tokenString = await AsyncStorage.getItem('@token');
     // if no token
     if(!tokenString) {

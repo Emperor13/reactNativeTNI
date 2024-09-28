@@ -1,14 +1,20 @@
 import { View } from "react-native";
-import { Text, Card, Input, Button, renderNode } from "@rneui/base";
+import { Text, Card, Input, Button, renderNode, Icon } from "@rneui/base";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { login } from "../services/auth-service";
 import { AxiosError } from "../services/http-service";
 import Toast from "react-native-toast-message";
+import {setIsLogin} from '../auth/auth-slice';
+import { useAppDispatch } from "../redux-toolkit/hooks";
 
 const LoginScreen = (): React.JSX.Element => {
+
+  const [showPass, setShowPass] = useState(false);
+  const dispatch = useAppDispatch();
+
   // 1.define validation with Yub
   const schema = yup.object().shape({
     email: yup
@@ -34,6 +40,7 @@ const LoginScreen = (): React.JSX.Element => {
     try {
       const res = await login(data.email, data.password);
       if(res.status === 200) {
+        dispatch(setIsLogin(true));
         Toast.show({type:'success', text1:"Login Successful!"})
         //console.log("Login successful!")
       }
@@ -73,10 +80,18 @@ const LoginScreen = (): React.JSX.Element => {
           control={control}
           render={({ field: { onBlur, onChange, value } }) => (
             <Input
-              secureTextEntry
+              secureTextEntry={!showPass}
               placeholder="Password"
               leftIcon={{ name: "key" }}
-              keyboardType="number-pad"
+              rightIcon={
+                //Add Icon to switch between hide/show password
+                <Icon 
+                name={showPass?"eye":"eye-off"}
+                type="feather"
+                onPress={() => setShowPass(!showPass)}
+                />
+              }
+              keyboardType="default"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
